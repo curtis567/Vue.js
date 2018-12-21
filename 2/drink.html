@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Document</title>
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+      integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
+      crossorigin="anonymous"
+    />
+    <style>
+      .title {
+        height: 350px;
+        width: 400px;
+      }
+      .left {
+        width: 0;
+        height: 0;
+        border-top: 10px solid transparent;
+        border-right: 20px solid lightslategray;
+        border-bottom: 10px solid transparent;
+      }
+      .right {
+        width: 0;
+        height: 0;
+        border-top: 10px solid transparent;
+        border-left: 20px solid lightslategray;
+        border-bottom: 10px solid transparent;
+      }
+      .description {
+        position: relative;
+        text-align: center;
+        height: 200px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+      .span1 {
+        display: inline-block;
+        background-color: darkslategray;
+        height: 30px;
+        width: 50px;
+        text-align: center;
+        line-height: 30px;
+        color: white;
+        border-radius: 40px 0px 0px 40px;
+      }
+      .span2 {
+        display: inline-block;
+        background-color: rgb(226, 198, 35);
+        height: 30px;
+        width: 150px;
+        text-align: center;
+        line-height: 30px;
+        border-radius: 0px 40px 40px 0px;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="app">
+      <div class="container title mb-5 text-center mt-5">
+        <h1>{{ title }}</h1>
+        <img class="img-fluid logo mt-5" :src="today.src" alt="" />
+      </div>
+      <div class="description">
+        <!--如果不是第一天就顯示 index != 0-->
+        <a v-if="this.index >0" class="left" @click="changeIndex(-1)"></a>
+        <div class="p-5" script="transform:scale3d(1.5,1.5,1)">
+          <span class="span1">{{ index + 1 }}</span
+          ><span class="span2">
+            <a :href="today.link">{{ today.title }}</a>
+          </span>
+        </div>
+        <!--如果不是最後一天就顯示 index != total-1 -->
+        <a
+          v-if="this.index < total-1"
+          class="right"
+          @click="changeIndex(1)"
+        ></a>
+      </div>
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.5.21/vue.js"></script>
+    <script>
+      let data = {
+        title: "飲料店",
+        index: 0,
+        menu: [
+          {
+            type: "1",
+            title: "50嵐",
+            link: "javascript:;",
+            src:
+              "https://trade.1111.com.tw/Include/getPhoto.ashx?vNo=247760&vType=1"
+          },
+          {
+            type: "2",
+            title: "珍煮丹",
+            link: "javascript:;",
+            src: "http://www.jenjudan.com/image/_imagecache/009.jpg"
+          },
+          {
+            type: "3",
+            title: "大苑子",
+            link: "javascript:;",
+            src:
+              "https://yt3.ggpht.com/a-/AN66SAz9YEeFWifY8f3uZ6k60SAlhg-B7APEjnImLA=s900-mo-c-c0xffffffff-rj-k-no"
+          },
+          {
+            type: "4",
+            title: "coco都可",
+            link: "javascript:;",
+            src:
+              "http://510.54vip.com.tw/upload/store3/user1/product/m1409637850.jpg"
+          },
+          {
+            type: "5",
+            title: "茶湯會",
+            link: "javascript:;",
+            src:
+              "https://files.parklane.com.tw/wp-content/uploads/2018/01/17142701/B1f_TEA_LOGO.jpg"
+          },
+          {
+            type: "6",
+            title: "好茶 Good Tea",
+            link: "javascript:;",
+            src: "https://pic.pimg.tw/ainycka0815/1512041915-3133307121.jpg"
+          }
+        ]
+      };
+
+      let vm = new Vue({
+        el: "#app",
+        data: data,
+        computed: {
+          today() {
+            return this.menu[this.index];
+          },
+          total() {
+            return this.menu.length;
+          }
+        },
+        methods: {
+          changeIndex(change) {
+            this.index = (this.index + change + this.total) % this.total;
+            // this.index += change;
+            // if (this.index < 0) this.index = this.menu.length - 1;
+            // else if (this.index > this.menu.length - 1) this.index = 0;
+          }
+        }
+      });
+    </script>
+  </body>
+</html>
