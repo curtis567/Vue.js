@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Document</title>
+    <style>
+      .input {
+        background: darkgreen;
+        height: 80px;
+        width: 500px;
+        border-radius: 10px 10px 10px 10px;
+        line-height: 40px;
+        margin: 100px auto;
+        color: blanchedalmond;
+
+        font-size: 20px;
+      }
+      .menu {
+        background: chartreuse;
+        height: 150px;
+        width: 500px;
+        border-radius: 10px 10px 10px 10px;
+        line-height: 25px;
+        margin: 0 auto;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="app">
+      <section>
+        <div class="container">
+          <div class="input" align="center">
+            {{ name }} ． {{ sex }}姓 ． 年齡為{{ age }} <br />
+            {{ favor.length ? "喜歡" : "" }} {{ favor.join("、") }} ．
+            {{ member ? "已" : "未" }}成為網站會員
+          </div>
+
+          <div class="menu">
+            <table align="center">
+              <tr>
+                <td class="title">姓名:</td>
+                <td><input v-model="name" /></td>
+              </tr>
+              <tr>
+                <td class="title">性別:</td>
+                <td>
+                  <input name="sex" type="radio" value="男" v-model="sex" />男
+                  <input name="sex" type="radio" value="女" v-model="sex" />女
+                </td>
+              </tr>
+              <tr>
+                <td class="title">年齡:</td>
+                <td>
+                  <select v-model="age">
+                    <option>20以下</option>
+                    <option selected>20-30歲</option>
+                    <option>30-40歲</option>
+                    <option>40歲以</option>
+                  </select>
+                </td>
+              </tr>
+              <tr>
+                <td class="title">興趣:</td>
+                <td>
+                  <input type="checkbox" v-model="favor" value="coding" />coding
+                  <input type="checkbox" v-model="favor" value="電玩" />電玩
+                  <input type="checkbox" v-model="favor" value="出遊" />出遊
+                </td>
+              </tr>
+              <tr>
+                <td class="title">會員:</td>
+                <td><input type="checkbox" v-model="member" />加入</td>
+              </tr>
+            </table>
+          </div>
+        </div>
+      </section>
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.5.21/vue.js"></script>
+    <script src="data.js"></script>
+  </body>
+</html>
